@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Financial Chatbot</title>
+<style>
+.content_wrapper{
+    position: absolute;
+    left:25%;
+    width:50%;
+    height:90%;
+    background: white;
+    border-radius: 10px;
+    box-shadow:0 0 7px #000;
+}
+
+.title{
+    background: darkblue;
+    height:50px;
+    line-height:50px;
+    border-radius: 10px 10px 0px 0px;
+    text-align:center;
+}
+
+.info_box{
+    height:85%;
+    overflow-y:scroll;
+}
+
+.type_box{
+    width:100%;
+    border-radius:0px 0px 10px 20px;
+    margin-bottom:0;
+    background: aliceblue;
+}
+
+.type_box input[type='text']{
+    width:90%;
+    height:50px;
+    padding-left:15px;
+    vertical-align:middle;
+    border:none;
+    background:aliceblue;
+    border-radius:0px 0px 0px 10px;
+}
+
+img#send{
+    width:30px;
+    height:30px;
+    vertical-align:middle
+}
+
+.type_box input[type='text']:focus{
+    outline:none;
+}
+
+img#send:focus{
+    outline:none;
+}
+
+.picture_left{
+    width:50px;
+    height:50px;
+    margin: 10px;
+    border-radius:200px;
+    float: left;
+    display:inline-block;
+    line-height: inherit;
+}
+
+.send_photo{
+    float:left;
+    height: 350px;
+    width:350px;
+    padding: 8px;
+    margin:15px 5px 5px 5px;
+    background: aliceblue;
+    border-radius:10px;
+    box-shadow:0 0 5px #000;
+}
+
+div.info_l{
+    width:66%;
+    float:left;
+}
+
+div.info_r{
+    width:66%;
+    float:right;
+}
+
+span.infol{
+    float:left;
+    margin:15px 5px 5px 5px;
+    width:auto;
+    height:auto;
+    padding: 8px;
+    background: aliceblue;
+    border-radius:10px;
+    box-shadow:0 0 5px #000;
+    white-space: pre-wrap;
+    word-wrap:break-word;
+    word-break:normal;
+    overflow: hidden;
+    display:inline-block;
+}
+
+span.infor{
+    float:right;
+    margin:10px;
+    width:auto;
+    height:auto;
+    padding: 8px;
+    margin-top:10px;
+    background: darkblue;
+    color: whitesmoke;
+    border-radius:10px;
+    box-shadow:0 0 5px #000;
+}
+
+
+</style>
+<script src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.js"></script>
+</head>
+
+<body onkeypress="check(event)">
+<div class="box">
+	<div id="content" class="content_wrapper">
+        <div class="title">
+            <span style="color: white;">Financial Chatbot</span>
+        </div>
+		<div class="info_box" id="info_box">
+			 <div class="info_l">
+				<img src="static/bot.jpg" class="picture_left">
+				<span class="infol">Hi,I'm Financebot.What can I do for you?</span>
+			</div>
+		</div>
+        <div class="type_box">
+        <input type="text" name="input_text" placeholder='Write a message...' id="text">
+        <img src="static/send_button.gif" id="send" onclick="send_msg();">
+        </div>
+	</div>
+</div>
+</body>
+<script>
+    var text =document.getElementById("text");
+    var info_box = document.getElementById("info_box");
+    function send_msg(){
+        if (text.value == '')
+        {
+            alert('Please type something before you click the send button...');
+        }
+        else
+        {
+            var rdiv = document.createElement('div');
+            var rspan = document.createElement('span');
+            var rtext = document.createTextNode(text.value);
+            rspan.appendChild(rtext);
+            rdiv.appendChild(rspan);
+            info_box.insertBefore(rdiv, info_box.lastChild);
+            rdiv.className = 'info_r';
+            rspan.className = 'infor';
+            info_box.scrollTop=info_box.scrollHeight;  //自动将滑动条下拉
+            var input_text=text.value
+            text.value = ''
+
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "/handle_msg",//后端请求
+                data: JSON.stringify({'input_text':input_text}),
+                success: function(result) {
+                    var ldiv = document.createElement('div');
+                    var lspan = document.createElement('span');
+                    var limg = document.createElement('img');
+                    var ltext = document.createTextNode(result["data"]);
+                    lspan.appendChild(ltext);
+                    ldiv.appendChild(limg);
+                    ldiv.appendChild(lspan);
+                    info_box.insertBefore(ldiv, info_box.lastChild);
+                    ldiv.className = 'info_l';
+                    lspan.className = 'infol';
+                    limg.className='picture_left';
+                    limg.src="static/bot.jpg";
+                    info_box.scrollTop=info_box.scrollHeight;  //自动将滑动条下拉
+
+                    if(result["photo"]!='')
+                    {
+                        var div = document.createElement('div');
+                        var img = document.createElement('img');
+                        var photo = document.createElement('img');
+                        info_box.insertBefore(div, info_box.lastChild);
+                        div.append(img);
+                        div.append(photo);
+                        div.className= 'info_l';
+                        img.className= 'picture_left';
+                        photo.className = 'send_photo';
+                        img.src="static/bot.jpg";
+                        photo.src="static/pictures/"+result["photo"]+".png";
+                        info_box.scrollTop=info_box.scrollHeight;  //自动将滑动条下拉
+                    }
+                }
+             });
+        }
+    }
+
+    function check(event) {
+        if(event.keyCode==13){
+            send_msg();
+        }
+    }
+
+</script>
+</html>
