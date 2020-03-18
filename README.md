@@ -2,11 +2,15 @@
 
 - 演示视频已上传到YouTube，国内需要用VPN来观看
 
+
+
 # **Demo-Gif**
 
 ![demo-1.gif](https://github.com/AshleyXM/FlaskChatbot/blob/master/img/demo-1.gif)
 
 ![demo-2.gif](https://github.com/AshleyXM/FlaskChatbot/blob/master/img/demo-2.gif)
+
+
 
 # **说明**
 
@@ -22,6 +26,8 @@ pipeline: "spacy_sklearn"
 
 - Rasa训练数据集的构造：使用了[Chatito工具](https://rodrigopivi.github.io/Chatito/)
 
+
+
 # **配置环境（python==3.6.2）**
 
 1. 下载zip包或者git clone
@@ -36,49 +42,62 @@ pipeline: "spacy_sklearn"
 
 4. 确保NLTK已下载以下数据包（可以新建一个.py文件执行以下代码）：
 
-```python
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('maxent_ne_chunker')
-nltk.download('words')
-nltk.download('treebank')
-```
+   ​		
 
-   			5. 提示：
+   ```python
+   nltk.download('punkt')
+   nltk.download('averaged_perceptron_tagger')
+   nltk.download('maxent_ne_chunker')
+   nltk.download('words')
+   nltk.download('treebank')
+   ```
+
+5. 友情提示：
 
 - 建议使用国内镜像源安装第三方库，比如Tsinghua,USTC和Douban的都不错！
 
-```python
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
-或
-pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt
-或
-pip install -i http://pypi.douban.com/simple/ -r requirements.txt
-```
+  ​		
+
+  ```
+  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
+  或
+  pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt
+  或
+  pip install -i http://pypi.douban.com/simple/ -r requirements.txt
+  ```
 
 - ​	当然，如果你会使用VPN上网，那么只需要开启你的全局代理即可。如下使用：
+
+  ​		
 
   ```python
   pip install 第三方库名 --proxy=地址:端口
   ```
 
-  6.按照[nginx教程](https://www.cnblogs.com/jiangwangxiang/p/8481661.html)安装好nginx，并配置好nginx.conf文件，如果有租用的云服务器可以配置自己的云服务器的IP地址，如果没有可以把自己的电脑当做服务器，可以实现局域网上的访问。
+6. 按照[nginx教程](https://www.cnblogs.com/jiangwangxiang/p/8481661.html)安装好nginx，并配置好nginx.conf文件，如果有租用的云服务器可以配置自己的云服务器的IP地址，如果没有可以把自己的电脑当做服务器，可以实现局域网上的访问。
+
+
 
 # **爬取数据**
 
 - 运用了scrapy库来爬取[EODDATA官网](http://www.eoddata.com/)上的所有NASDAQ股票，并将爬取的股票名和股票代码存储到数据库，以便实现之后的查询任务。
 - 若想运行scrapy来爬取数据，可以运行项目scrapy_dir/scrapy_dir/spiders目录下的[stocks_spider.py](https://github.com/AshleyXM/FlaskChatbot/blob/master/scrapy_dir/scrapy_dir/spiders/stocks_spider.py)文件
 
+
+
 # **运行bot**
 
 1. 将克隆的项目用Pycharm打开，在Terminal中输入：
 
-```python
-python tornado_server.py
-```
+   ```
+   python tornado_server.py
+   ```
 
-   			2. 启动这个项目需要一点时间，因为训练数据需要一定的时间来完成
-   			3. 接下来，打开浏览器，输入自己配置的服务器IP地址就可以访问项目的主页了
+   
+
+2. 启动这个项目需要一点时间，因为训练数据需要一定的时间来完成
+
+3. 接下来，打开浏览器，输入自己配置的服务器IP地址就可以访问项目的主页了
 
 # **参考**
 
