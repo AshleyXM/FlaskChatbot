@@ -42,8 +42,6 @@ pipeline: "spacy_sklearn"
 
 4. 确保NLTK已下载以下数据包（可以新建一个.py文件执行以下代码）：
 
-   ​		
-
    ```python
    nltk.download('punkt')
    nltk.download('averaged_perceptron_tagger')
@@ -56,8 +54,6 @@ pipeline: "spacy_sklearn"
 
 - 建议使用国内镜像源安装第三方库，比如Tsinghua,USTC和Douban的都不错！
 
-  ​		
-
   ```
   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
   或
@@ -67,8 +63,6 @@ pipeline: "spacy_sklearn"
   ```
 
 - ​	当然，如果你会使用VPN上网，那么只需要开启你的全局代理即可。如下使用：
-
-  ​		
 
   ```python
   pip install 第三方库名 --proxy=地址:端口
