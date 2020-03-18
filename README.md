@@ -55,11 +55,11 @@ pipeline: "spacy_sklearn"
 - 建议使用国内镜像源安装第三方库，比如Tsinghua,USTC和Douban的都不错！
 
   ```
-  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
-  或
-  pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt
-  或
-  pip install -i http://pypi.douban.com/simple/ -r requirements.txt
+  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt  （Tsinghua镜像源）
+ 
+  pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt  （USTC镜像源）
+  
+  pip install -i http://pypi.douban.com/simple/ -r requirements.txt  （Douban镜像源）
   ```
 
 - ​	当然，如果你会使用VPN上网，那么只需要开启你的全局代理即可。如下使用：
