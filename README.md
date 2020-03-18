@@ -64,7 +64,7 @@ pipeline: "spacy_sklearn"
 
 - ​	当然，如果你会使用VPN上网，那么只需要开启你的全局代理即可。如下使用：
 
-  ```python
+  ```
   pip install 第三方库名 --proxy=地址:端口
   ```
 
