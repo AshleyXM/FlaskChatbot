@@ -3,4 +3,4 @@ rasa==1.7.2
 nltk==3.4.5
 yfinance==0.1.54
 matplotlib==2.2.5
-tornado==6.0.3
+tornado==6.3.3
